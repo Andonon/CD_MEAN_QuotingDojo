@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <title>Basic Mongoose App</title>
+        <meta description='Main page for Basic Mongoose App'
+        <meta charset='utf-8'/>
+        <link rel='stylesheet' type='text/css' href='css/styles.css' />
+    </head>
+    <body>
+        <div id='wrapper'>
+            <h2>Hello</h2>
+            <br>
+            <div>
+                <form id='userform' action="/users" method='POST'>
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" value="">
+                    <label for="age">Age</label>
+                    <input type="number" name="age" value="">
+                    <input type="submit" name="submit" value="submit">
+                </form>
+            </div>
+            <hr>
+            <div>
+                <h3>Existing Users:</h3>
+                <% if(users) { %>
+                    <table style="width:20%">
+                        <tr>
+                            <th>Name</th>
+                            <th>Age</th>
+                        </tr>
+                        <% for(let i = 0; i < users.length; i++){ %>
+                            <tr> 
+                                <td><%= users[i].name %></td>
+                                <td><%= users[i].age %></td>
+                            </tr>
+                        <% } %>
+                    </table>
+                <% } %>
+            </div>
+        </div>
+    </body>
+</html>
