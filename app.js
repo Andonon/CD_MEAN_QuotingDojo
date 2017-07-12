@@ -8,39 +8,44 @@ app.use(express.static(path.join(__dirname + '/static/')));
 app.set('views', path.join(__dirname + '/views/'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
-mongoose.connect('mongodb://localhost/basic_mongoose');
+mongoose.connect('mongodb://localhost/quoting_dojo');
 mongoose.Promise = global.Promise;
 
-var UserSchema = new mongoose.Schema({
+var QuoteSchema = new mongoose.Schema({
     name: String, 
-    age: Number
-});
+    quote: String,
+}, { timestamps: true });
 
-mongoose.model('User', UserSchema);
-var User = mongoose.model('User');
+mongoose.model('Quote', QuoteSchema);
+var Quote = mongoose.model('Quote');
 
 app.get('/', function(req, res){
-    User.find({}, function(err, users){
-        console.log(users);
-        console.log(users[0])
+    res.render('index');
+});
+
+app.get('/quotes', function(req, res){
+    console.log("Getting Quotes Page...")
+    Quote.find({}, function(err, quotes){
+        console.log(quotes);
+        console.log(quotes[0])
         if(err){
             console.log("There was an error with db...")
             res.render('index');
             }
         else {
-            res.render('index', {users: users});
+            res.render('quotes', {quotes: quotes});
         }
     });
-});
+})
 
-app.post('/users', function(req, res){
+app.post('/quotes', function(req, res){
     console.log(req.body);
-    const user = new User({name: req.body.name, age: req.body.age});
-    user.save(function(err){
+    const quote = new Quote({name: req.body.name, quote: req.body.quote});
+    quote.save(function(err){
         if(err) {
             console.log('There was an error...');
         } 
-        else { console.log('successfully added user...');
+        else { console.log('successfully added quote...');
         }
         res.redirect('/');
         });   

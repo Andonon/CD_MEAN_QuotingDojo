@@ -13,8 +13,8 @@
     font-family: 'Open Sans', sans-serif;
 }
 #wrapper {
-    height: 100vh;
-    width: 100vw;
+    height: 50vh;
+    width: 50vw;
     padding: 50px;
     background-image: linear-gradient(300deg, grey, white);
 }

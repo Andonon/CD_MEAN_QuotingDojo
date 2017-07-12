@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <title>Quoting Dojo</title>
+        <meta description='Main page for Quoting Dojo App'
+        <meta charset='utf-8'/>
+        <link rel='stylesheet' type='text/css' href='css/styles.css' />
+    </head>
+    <body>
+        <div id='wrapper'>
+            <h4>Here are the awesome quotes</h4>
+            <br>
+            <div>
+                <% if(quotes) { %>
+                    <% for(let i = 0; i < quotes.length; i++) { %>
+                        <p>"<%= quotes[i].quote %>"</p>
+                        <p>- <%= quotes[i].name %> at <%= quotes[i].createdAt %></p>
+                        <hr>
+                    <% } %>
+                <% } %>
+            </div>
+            <div>
+                <form id="goback" method='GET' action='/'>
+                    <input id="goback" type='submit' value='Go Back'>
+                </form>
+            </div>  
+        </div>
+    </body>
+</html>
